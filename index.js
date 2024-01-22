@@ -31,10 +31,13 @@ app.use("/transaction", transactionRoutes);
 
 // Mongoose Setup
 const PORT = process.env.PORT || 9000;
+mongoose.Promise = global.Promise;
 mongoose 
     .connect(process.env.MONGO_URL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
+        // useNewUrlParser: true,
+        // useUnifiedTopology: true, 
+        useMongoClient: true
+        
     })
     .then(async()=>{
         app.listen(PORT, ()=>console.log(`Server Port: ${PORT}`));
